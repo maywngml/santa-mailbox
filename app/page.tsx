@@ -1,101 +1,148 @@
-import Image from "next/image";
+import Image from 'next/image';
+import { Parisienne } from 'next/font/google';
+
+const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <section className='text-center'>
+      <h1
+        className={`${parisienne.className} mt-5 text-[40px] lg:text-[110px]`}
+      >
+        Merry Christmas
+      </h1>
+      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]'>
+        <div className='relative mx-auto w-[250px] h-[250px] lg:w-[450px] lg:h-[450px]'>
+          <Image
+            src={'/images/christmas-card.png'}
+            fill
+            sizes='100%'
+            alt='크리스마스 카드 이미지'
+            priority
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <p className='mt-4 text-sm lg:text-lg'>
+          편지지를 클릭해 산타할아버지에게 <br className='block lg:hidden' />{' '}
+          편지를 보내보세요 📩
+        </p>
+      </div>
+      <div className='absolute top-[calc(50%-104px)] left-[calc(50%-104px)] -translate-x-1/2 -translate-y-1/2 w-[80px] h-[98px] -rotate-[13.75deg] z-[2] lg:w-[170px] lg:h-[210px] lg:top-[calc(50%-180px)] lg:left-[calc(50%-195px)]'>
+        <Image
+          src={'/images/santa-claus.png'}
+          fill
+          sizes='100%'
+          alt='산타 클로스 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+50px)] left-[calc(50%+110px)] -translate-x-1/2 -translate-y-1/2 w-[110px] h-[110px] rotate-[31.9deg] lg:w-[300px] lg:h-[300px] lg:top-[calc(50%+50px)] lg:left-[calc(50%+210px)]'>
+        <Image
+          src={'/images/christmas-wreath.png'}
+          fill
+          sizes='100%'
+          alt='크리스마스 화환 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%-200px)] left-[calc(50%+40px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[0.31deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%-260px)] lg:left-[calc(50%+320px)]'>
+        <Image
+          src={'/images/snowflake.png'}
+          fill
+          sizes='100%'
+          alt='눈 결정체 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%-160px)] left-[calc(50%+130px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rotate-[18.31deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%-340px)] lg:left-[calc(50%+540px)]'>
+        <Image
+          src={'/images/snowflake.png'}
+          fill
+          sizes='100%'
+          alt='눈 결정체 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%-60px)] left-[calc(50%+130px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[96.71deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%-140px)] lg:left-[calc(50%+450px)]'>
+        <Image
+          src={'/images/candy-cane.png'}
+          fill
+          sizes='100%'
+          alt='사탕 지팡이 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+180px)] left-[calc(50%+130px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rotate-[10.42deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+50px)] lg:left-[calc(50%+520px)]'>
+        <Image
+          src={'/images/gingerbread-man.png'}
+          fill
+          sizes='100%'
+          alt='쿠키 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+260px)] left-[calc(50%+120px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rotate-[25.31deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+240px)] lg:left-[calc(50%+520px)]'>
+        <Image
+          src={'/images/gift.png'}
+          fill
+          sizes='100%'
+          alt='선물 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+250px)] left-[calc(50%+40px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[8.31deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+255px)] lg:left-[calc(50%+280px)]'>
+        <Image
+          src={'/images/snowflake.png'}
+          fill
+          sizes='100%'
+          alt='눈 결정체 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%-190px)] left-[calc(50%-120px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[16.27deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%-255px)] lg:left-[calc(50%-560px)]'>
+        <Image
+          src={'/images/snowflake.png'}
+          fill
+          sizes='100%'
+          alt='눈 결정체 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+40px)] left-[calc(50%-250px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[16.81deg] lg:w-[100px] lg:h-[100px] lg:top-1/2 lg:left-[calc(50%-560px)]'>
+        <Image
+          src={'/images/gift.png'}
+          fill
+          sizes='100%'
+          alt='선물 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+40px)] left-[calc(50%-150px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[31.61deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+60px)] lg:left-[calc(50%-350px)]'>
+        <Image
+          src={'/images/gingerbread-man.png'}
+          fill
+          sizes='100%'
+          alt='쿠키 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+170px)] left-[calc(50%-140px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+300px)] lg:left-[calc(50%-540px)]'>
+        <Image
+          src={'/images/candy-cane.png'}
+          fill
+          sizes='100%'
+          alt='사탕 지팡이 이미지'
+          priority
+        ></Image>
+      </div>
+      <div className='absolute top-[calc(50%+250px)] left-[calc(50%-80px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[19.74deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%+300px)] lg:left-[calc(50%-300px)]'>
+        <Image
+          src={'/images/snowflake.png'}
+          fill
+          sizes='100%'
+          alt='눈 결정체 이미지'
+          priority
+        ></Image>
+      </div>
+    </section>
   );
 }
