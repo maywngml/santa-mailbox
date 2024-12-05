@@ -1,3 +1,5 @@
+'use client';
+import { useRef } from 'react';
 import Image from 'next/image';
 import { Parisienne } from 'next/font/google';
 import { BackgroundIcons } from '@/components/common';
@@ -5,6 +7,18 @@ import { BackgroundIcons } from '@/components/common';
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  const handleCardMouseEnter = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = `scale(1.1)`;
+  };
+
+  const handleCardMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = `scale(1)`;
+  };
+
   return (
     <section className='text-center'>
       <h1
@@ -13,7 +27,12 @@ export default function Home() {
         Merry Christmas
       </h1>
       <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]'>
-        <div className='relative mx-auto w-[250px] h-[250px] lg:w-[450px] lg:h-[450px]'>
+        <div
+          className='relative mx-auto w-[250px] h-[250px] hover:cursor-pointer lg:w-[450px] lg:h-[450px]'
+          ref={cardRef}
+          onMouseEnter={handleCardMouseEnter}
+          onMouseLeave={handleCardMouseLeave}
+        >
           <Image
             src={'/images/christmas-card.png'}
             fill
@@ -22,7 +41,7 @@ export default function Home() {
             priority
           />
         </div>
-        <p className='mt-4 text-sm lg:text-lg'>
+        <p className='mt-6 text-sm lg:text-lg'>
           편지지를 클릭해 산타할아버지에게 <br className='block lg:hidden' />{' '}
           편지를 보내보세요 📩
         </p>
