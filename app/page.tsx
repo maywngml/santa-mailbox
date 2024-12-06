@@ -1,13 +1,14 @@
 'use client';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { Parisienne } from 'next/font/google';
-import { BackgroundIcons } from '@/components/common';
+import { BackgroundIcons, SoundToggleButton } from '@/components/common';
 
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const soundRef = useRef<HTMLAudioElement | null>(null);
 
   const handleCardMouseEnter = () => {
     if (!cardRef.current) return;
@@ -19,6 +20,21 @@ export default function Home() {
     cardRef.current.style.transform = `scale(1)`;
   };
 
+  const handleSoundOnClick = useCallback(() => {
+    if (!soundRef.current) return;
+    soundRef.current.pause();
+  }, []);
+
+  const handleSoundOffClick = useCallback(async () => {
+    if (!soundRef.current) return;
+    try {
+      await soundRef.current.play();
+    } catch (error) {
+      // TODO: 노래를 재생할 수 없습니다. 토스트 메세지 띄우기
+      console.error({ error });
+    }
+  }, []);
+
   return (
     <section className='text-center'>
       <h1
@@ -26,6 +42,20 @@ export default function Home() {
       >
         Merry Christmas
       </h1>
+      <SoundToggleButton
+        onSoundOnClick={handleSoundOnClick}
+        onSoundOffClick={handleSoundOffClick}
+      />
+      <audio
+        ref={soundRef}
+        loop
+      >
+        <source
+          src='/bgm/magic-christmas-night.mp3'
+          type='audio/mp3'
+        />
+        현재 브라우저에서는 오디오를 지원하지 않습니다.
+      </audio>
       <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]'>
         <div
           className='relative mx-auto w-[250px] h-[250px] hover:cursor-pointer lg:w-[450px] lg:h-[450px]'
