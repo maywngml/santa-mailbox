@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import Image from 'next/image';
 
-export default function BackgroundIons() {
+function BackgroundIcons() {
   return (
     <Fragment>
       <div className='absolute top-[calc(50%-200px)] left-[calc(50%+40px)] -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] -rotate-[0.31deg] lg:w-[100px] lg:h-[100px] lg:top-[calc(50%-260px)] lg:left-[calc(50%+320px)]'>
@@ -106,3 +106,5 @@ export default function BackgroundIons() {
     </Fragment>
   );
 }
+
+export default memo(BackgroundIcons);
