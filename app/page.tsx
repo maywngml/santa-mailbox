@@ -1,14 +1,24 @@
 'use client';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Parisienne } from 'next/font/google';
 import { BackgroundIcons, SoundToggleButton } from '@/components/common';
+import { LetterPaper } from '@/components/ui';
 
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const soundRef = useRef<HTMLAudioElement | null>(null);
+  const [isLetterPaperOpen, setIsLetterPaperOpen] = useState<boolean>(false);
+
+  const changeIsLetterPaperOpen = () => {
+    setIsLetterPaperOpen((prevIsLetterPaperOpen) => !prevIsLetterPaperOpen);
+  };
+
+  const handleCardClick = () => {
+    changeIsLetterPaperOpen();
+  };
 
   const handleCardMouseEnter = () => {
     if (!cardRef.current) return;
@@ -60,6 +70,7 @@ export default function Home() {
         <div
           className='relative mx-auto w-[250px] h-[250px] hover:cursor-pointer lg:w-[450px] lg:h-[450px]'
           ref={cardRef}
+          onClick={handleCardClick}
           onMouseEnter={handleCardMouseEnter}
           onMouseLeave={handleCardMouseLeave}
         >
@@ -95,6 +106,11 @@ export default function Home() {
         ></Image>
       </div>
       <BackgroundIcons />
+      <LetterPaper
+        isOutgoing={true}
+        isOpen={isLetterPaperOpen}
+        onClose={changeIsLetterPaperOpen}
+      />
     </section>
   );
 }
