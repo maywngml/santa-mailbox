@@ -1,28 +1,33 @@
+import { CustomModal } from './Modal';
+import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+
 interface LetterPaperProps {
   isOutgoing: boolean;
-  isVisible: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }
 
 export default function LetterPaper({
   isOutgoing,
-  isVisible,
+  isOpen,
   onClose,
 }: LetterPaperProps) {
-  const handleOuterLayerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as Element).classList.contains('outer-layer')) {
-      onClose();
-    }
-  };
-
+  // TODO: 딱 ui만 담당하고 incomingLetter, outgoingLetter를 쪼개주면 좋을 것 같음
   return (
-    <div
-      className={`${
-        isVisible ? 'block' : 'hidden'
-      } outer-layer fixed flex top-0 left-0 justify-center items-end w-screen h-screen bg-transparent-black z-10`}
-      onClick={handleOuterLayerClick}
+    <CustomModal
+      isOpen={isOpen}
+      onClose={onClose}
+      wrapperClassName='flex items-end justify-center'
     >
-      <div className='w-[90%] max-w-[1000px] h-4/5 max-h-[1500px] rounded-tl-[20px] rounded-tr-[20px] bg-beige lg:w-3/5'></div>
-    </div>
+      <div className='relative mx-auto px-5 w-[90vw] max-w-[1000px] h-[80vh] max-h-[1500px] rounded-tl-[20px] rounded-tr-[20px] bg-beige animate-letterSlideUp lg:w-[60vw]'>
+        <XMarkIcon
+          className='absolute top-4 right-4 hover:cursor-pointer'
+          width={30}
+          height={30}
+          color='#B8771C'
+          onClick={onClose}
+        />
+      </div>
+    </CustomModal>
   );
 }
