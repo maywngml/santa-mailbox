@@ -19,6 +19,15 @@ export default {
         green: 'var(--green)',
         'dark-green': 'var(--dark-green)',
       },
+      keyframes: {
+        letterSlideUp: {
+          '0%': { transform: 'translateY(200px)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        letterSlideUp: 'letterSlideUp 0.3s ease-out forwards',
+      },
     },
   },
   plugins: [],
