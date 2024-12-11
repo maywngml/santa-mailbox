@@ -8,7 +8,9 @@
   --transparent-black: rgba(0, 0, 0, 0.32);
   --rose: #bf3131;
   --beige: #fff5e1;
+  --light-brown: #c39b63;
   --brown: #b8771c;
+  --dark-brown: #8a5915;
   --light-green: #046307;
   --green: #365e32;
   --dark-green: #6baa75;
@@ -35,4 +37,10 @@ img {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
 }
