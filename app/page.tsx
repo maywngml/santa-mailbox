@@ -3,24 +3,24 @@ import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Parisienne } from 'next/font/google';
 import { BackgroundIcons, SoundToggleButton } from '@/components/common';
-import { LetterPaperModal } from '@/components/letter';
+import { LetterFormModal } from '@/components/letter';
 
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const soundRef = useRef<HTMLAudioElement | null>(null);
-  const [isLetterPaperModalOpen, setIsLetterPaperModalOpen] =
+  const [isLetterFormModalOpen, setIsLetterFormModalOpen] =
     useState<boolean>(false);
 
-  const changeIsLetterPaperModalOpen = () => {
-    setIsLetterPaperModalOpen(
-      (prevIsLetterPaperModalOpen) => !prevIsLetterPaperModalOpen
+  const changeIsLetterFormModalOpen = () => {
+    setIsLetterFormModalOpen(
+      (prevIsLetterFormModalOpen) => !prevIsLetterFormModalOpen
     );
   };
 
   const handleCardClick = () => {
-    changeIsLetterPaperModalOpen();
+    changeIsLetterFormModalOpen();
   };
 
   const handleCardMouseEnter = () => {
@@ -109,12 +109,10 @@ export default function Home() {
         ></Image>
       </div>
       <BackgroundIcons />
-      <LetterPaperModal
-        isOpen={isLetterPaperModalOpen}
-        onClose={changeIsLetterPaperModalOpen}
-      >
-        <div></div>
-      </LetterPaperModal>
+      <LetterFormModal
+        isOpen={isLetterFormModalOpen}
+        onClose={changeIsLetterFormModalOpen}
+      />
     </section>
   );
 }
