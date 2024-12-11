@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Parisienne } from 'next/font/google';
 import { BackgroundIcons, SoundToggleButton } from '@/components/common';
 import { LetterFormModal } from '@/components/letter';
+import type { LetterStatusType } from '@/types/letter';
 
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
@@ -12,6 +13,8 @@ export default function Home() {
   const soundRef = useRef<HTMLAudioElement | null>(null);
   const [isLetterFormModalOpen, setIsLetterFormModalOpen] =
     useState<boolean>(false);
+  const [letterSendStatus, setLetterSendStatus] =
+    useState<LetterStatusType>('idle');
 
   const changeIsLetterFormModalOpen = () => {
     setIsLetterFormModalOpen(
@@ -47,6 +50,10 @@ export default function Home() {
       console.error({ error });
     }
   }, []);
+
+  const handleLetterSend = (status: LetterStatusType) => {
+    setLetterSendStatus(status);
+  };
 
   return (
     <section className='text-center'>
@@ -112,6 +119,7 @@ export default function Home() {
       <LetterFormModal
         isOpen={isLetterFormModalOpen}
         onClose={changeIsLetterFormModalOpen}
+        onSend={handleLetterSend}
       />
     </section>
   );

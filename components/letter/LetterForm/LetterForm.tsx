@@ -1,9 +1,23 @@
+import { FormEvent } from 'react';
 import { LetterTextArea } from '..';
 import { Button } from '@/components/ui';
+import type { LetterStatusType } from '@/types/letter';
 
-export default function LetterForm() {
+interface LetterFormProps {
+  onSend: (status: LetterStatusType) => void;
+}
+
+export default function LetterForm({ onSend }: LetterFormProps) {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSend('idle');
+  };
+
   return (
-    <form className='h-full'>
+    <form
+      className='h-full'
+      onSubmit={handleSubmit}
+    >
       <label className='mr-3 font-bold text-dark-brown lg:text-xl lg:leading-[20px]'>
         Email
       </label>
