@@ -30,7 +30,7 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         isOutgoing={true}
       />
       <Button
-        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2 bg-dark-green text-sm lg:w-[120px] lg:bottom-5 lg:text-lg'
+        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2  text-sm lg:w-[120px] lg:bottom-5 lg:text-lg'
         type='submit'
       >
         작성 완료
