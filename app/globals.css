@@ -11,9 +11,9 @@
   --light-brown: #c39b63;
   --brown: #b8771c;
   --dark-brown: #8a5915;
-  --light-green: #046307;
-  --green: #365e32;
-  --dark-green: #6baa75;
+  --light-green: #6baa75;
+  --green: #046307;
+  --dark-green: #365e32;
 }
 
 @media (prefers-color-scheme: dark) {
