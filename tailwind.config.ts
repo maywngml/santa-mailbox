@@ -46,6 +46,9 @@ export default {
       animation: {
         letterSlideUp: 'letterSlideUp 0.3s ease-out forwards',
       },
+      screens: {
+        mobile: { raw: '(max-width: 1023px)' },
+      },
     },
   },
   plugins: [],
