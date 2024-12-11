@@ -1,8 +1,9 @@
 import { LetterTextArea } from '..';
+import { Button } from '@/components/ui';
 
 export default function LetterForm() {
   return (
-    <div className='h-full'>
+    <form className='h-full'>
       <label className='mr-3 font-bold text-dark-brown lg:text-xl lg:leading-[20px]'>
         Email
       </label>
@@ -14,6 +15,12 @@ export default function LetterForm() {
         className='mt-2 lg:mt-[10px]'
         isOutgoing={true}
       />
-    </div>
+      <Button
+        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2 bg-dark-green text-sm lg:w-[120px] lg:bottom-5 lg:text-lg'
+        type='submit'
+      >
+        작성 완료
+      </Button>
+    </form>
   );
 }
