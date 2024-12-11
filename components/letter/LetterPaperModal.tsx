@@ -1,18 +1,18 @@
-import { CustomModal } from './Modal';
+import { ReactNode } from 'react';
+import { CustomModal } from '../ui';
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
 
-interface LetterPaperProps {
-  isOutgoing: boolean;
+interface LetterPaperModalProps {
+  children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function LetterPaper({
-  isOutgoing,
+export default function LetterPaperModal({
+  children,
   isOpen,
   onClose,
-}: LetterPaperProps) {
-  // TODO: 딱 ui만 담당하고 incomingLetter, outgoingLetter를 쪼개주면 좋을 것 같음
+}: LetterPaperModalProps) {
   return (
     <CustomModal
       isOpen={isOpen}
@@ -27,6 +27,7 @@ export default function LetterPaper({
           color='#B8771C'
           onClick={onClose}
         />
+        {children}
       </div>
     </CustomModal>
   );
