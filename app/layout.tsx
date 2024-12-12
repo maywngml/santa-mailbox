@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Parisienne } from 'next/font/google';
-import { BackgroundIcons } from '@/components/common';
+import { Layout } from '@/components/common';
 import './globals.css';
 
 const neoDgm = localFont({
@@ -9,7 +8,6 @@ const neoDgm = localFont({
   variable: '--font-neodgm',
   weight: '100 900',
 });
-const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '산타 우체통',
@@ -25,15 +23,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${neoDgm.variable} antialiased`}>
         <main>
-          <section>
-            <h1
-              className={`${parisienne.className} mt-5 text-[40px] text-center lg:text-[110px]`}
-            >
-              Merry Christmas
-            </h1>
-            {children}
-            <BackgroundIcons />
-          </section>
+          <Layout>{children}</Layout>
         </main>
       </body>
     </html>
