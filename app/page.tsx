@@ -1,7 +1,6 @@
 'use client';
 import { useCallback, useRef, useState } from 'react';
-import { Parisienne } from 'next/font/google';
-import { BackgroundIcons, SoundToggleButton } from '@/components/common';
+import { SoundToggleButton } from '@/components/common';
 import {
   LetterStatusFailureView,
   LetterStatusIdleView,
@@ -10,8 +9,6 @@ import {
 } from '@/components/home';
 import { LetterFormModal } from '@/components/letter';
 import type { LetterStatusType } from '@/types/letter';
-
-const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   const soundRef = useRef<HTMLAudioElement | null>(null);
@@ -49,12 +46,7 @@ export default function Home() {
   };
 
   return (
-    <section className='text-center'>
-      <h1
-        className={`${parisienne.className} mt-5 text-[40px] lg:text-[110px]`}
-      >
-        Merry Christmas
-      </h1>
+    <div className='text-center'>
       <SoundToggleButton
         onSoundOnClick={handleSoundOnClick}
         onSoundOffClick={handleSoundOffClick}
@@ -79,12 +71,11 @@ export default function Home() {
           {letterStatus === 'success' && <LetterStatusSuccessView />}
         </div>
       }
-      <BackgroundIcons />
       <LetterFormModal
         isOpen={isLetterFormModalOpen}
         onClose={changeIsLetterFormModalOpen}
         onSend={handleLetterSend}
       />
-    </section>
+    </div>
   );
 }
