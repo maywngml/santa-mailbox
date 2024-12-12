@@ -3,7 +3,7 @@ import { Button } from '@/components/ui';
 
 export default function NotFound() {
   return (
-    <div className='text-center mt-[50px] lg:mt-[120px]'>
+    <div className='relative text-center mt-[50px] z-[1] lg:mt-[120px]'>
       <h2 className='text-[80px] leading-[80px] lg:text-[120px] lg:leading-[120px]'>
         404
       </h2>
