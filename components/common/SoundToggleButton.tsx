@@ -1,3 +1,4 @@
+'use client';
 import { Fragment, memo, useState } from 'react';
 import SpeakerWaveIcon from '@heroicons/react/16/solid/SpeakerWaveIcon';
 import SpeakerXMarkIcon from '@heroicons/react/16/solid/SpeakerXMarkIcon';
