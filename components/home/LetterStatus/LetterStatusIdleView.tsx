@@ -1,4 +1,4 @@
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import Image from 'next/image';
 
 interface LetterStatusIdleViewProps {
@@ -8,25 +8,11 @@ interface LetterStatusIdleViewProps {
 export default function LetterStatusIdleView({
   onCardClick,
 }: LetterStatusIdleViewProps) {
-  const cardRef = useRef<HTMLDivElement | null>(null);
-
-  const handleCardMouseEnter = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = `scale(1.1)`;
-  };
-
-  const handleCardMouseLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = `scale(1)`;
-  };
   return (
     <Fragment>
       <div
-        className='relative mx-auto w-[250px] h-[250px] z-[1] hover:cursor-pointer lg:w-[450px] lg:h-[450px]'
-        ref={cardRef}
+        className='relative mx-auto w-[250px] h-[250px] z-[1] hover:cursor-pointer hover:scale-110 lg:w-[450px] lg:h-[450px]'
         onClick={onCardClick}
-        onMouseEnter={handleCardMouseEnter}
-        onMouseLeave={handleCardMouseLeave}
       >
         <Image
           src={'/images/christmas-card.png'}
