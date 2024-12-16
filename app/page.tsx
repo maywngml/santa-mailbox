@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   LetterStatusFailureView,
   LetterStatusIdleView,
@@ -20,12 +20,13 @@ export default function Home() {
     );
   };
 
-  const handleCardClick = () => {
+  const handleCardClick = useCallback(() => {
     changeIsLetterFormModalOpen();
-  };
+  }, []);
 
-  const handleLetterSend = (status: LetterStatusType) => {
-    setLetterStatus(status);
+  const handleLetterSend = () => {
+    setLetterStatus('loading');
+    changeIsLetterFormModalOpen();
   };
 
   return (
