@@ -27,7 +27,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: neodgm;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 img {
