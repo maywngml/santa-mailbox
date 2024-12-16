@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { LetterViewModal } from '@/components/letter';
@@ -7,7 +7,6 @@ import { LetterViewModal } from '@/components/letter';
 export default function Mailbox() {
   const searchParams = useSearchParams();
   const letterId = searchParams.get('letterId');
-  const mailboxRef = useRef<HTMLDivElement | null>(null);
   const [isLetterViewModalOpen, setIsLetterViewModalOpen] =
     useState<boolean>(false);
   const information = [
@@ -26,27 +25,14 @@ export default function Mailbox() {
     changeIsLetterViewModalOpen();
   };
 
-  const handleCardMouseEnter = () => {
-    if (!mailboxRef.current || !letterId) return;
-    mailboxRef.current.style.transform = `scale(1.1)`;
-  };
-
-  const handleCardMouseLeave = () => {
-    if (!mailboxRef.current || !letterId) return;
-    mailboxRef.current.style.transform = `scale(1)`;
-  };
-
   return (
     <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1] break-keep text-center '>
       <div className='mobile:w-[90vw] mobile:max-w-[400px] flex flex-col items-center gap-3'>
         <div
           className={`relative mobile:w-[200px] mobile:h-[200px] w-[400px] h-[400px] ${
-            letterId && 'hover:cursor-pointer'
+            letterId && 'hover:cursor-pointer hover:scale-110'
           }`}
-          ref={mailboxRef}
           onClick={handleCardClick}
-          onMouseEnter={handleCardMouseEnter}
-          onMouseLeave={handleCardMouseLeave}
         >
           <Image
             src={'/images/mailbox.png'}
