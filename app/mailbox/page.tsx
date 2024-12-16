@@ -1,12 +1,19 @@
 'use client';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { LetterViewModal } from '@/components/letter';
 
 export default function Mailbox() {
+  const searchParams = useSearchParams();
+  const letterId = searchParams.get('letterId');
   const mailboxRef = useRef<HTMLDivElement | null>(null);
   const [isLetterViewModalOpen, setIsLetterViewModalOpen] =
     useState<boolean>(false);
+  const information = [
+    ['산타 할아버지의 답장이 도착했어요 💌', '우체통을 클릭해보세요!'],
+    ['산타 할아버지에게 받은 답장이 없어요 😢', '메일함을 다시 확인해 주세요!'],
+  ];
 
   const changeIsLetterViewModalOpen = () => {
     setIsLetterViewModalOpen(
@@ -15,16 +22,17 @@ export default function Mailbox() {
   };
 
   const handleCardClick = () => {
+    if (!letterId) return;
     changeIsLetterViewModalOpen();
   };
 
   const handleCardMouseEnter = () => {
-    if (!mailboxRef.current) return;
+    if (!mailboxRef.current || !letterId) return;
     mailboxRef.current.style.transform = `scale(1.1)`;
   };
 
   const handleCardMouseLeave = () => {
-    if (!mailboxRef.current) return;
+    if (!mailboxRef.current || !letterId) return;
     mailboxRef.current.style.transform = `scale(1)`;
   };
 
@@ -32,7 +40,9 @@ export default function Mailbox() {
     <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1] break-keep text-center '>
       <div className='mobile:w-[90vw] mobile:max-w-[400px] flex flex-col items-center gap-3'>
         <div
-          className='relative mobile:w-[200px] mobile:h-[200px] w-[400px] h-[400px] hover:cursor-pointer'
+          className={`relative mobile:w-[200px] mobile:h-[200px] w-[400px] h-[400px] ${
+            letterId && 'hover:cursor-pointer'
+          }`}
           ref={mailboxRef}
           onClick={handleCardClick}
           onMouseEnter={handleCardMouseEnter}
@@ -47,15 +57,19 @@ export default function Mailbox() {
           ></Image>
         </div>
         <p className='mt-2 text-sm lg:mt-4 lg:text-lg'>
-          산타 할아버지의 답장이 도착했어요 💌
-          <span className='block'>우체통을 클릭해보세요!</span>
+          {letterId ? information[0][0] : information[1][0]}
+          <span className='block'>
+            {letterId ? information[0][1] : information[1][1]}
+          </span>
         </p>
+        {isLetterViewModalOpen && letterId && (
+          <LetterViewModal
+            isOpen={isLetterViewModalOpen}
+            onClose={changeIsLetterViewModalOpen}
+            letterId={letterId}
+          />
+        )}
       </div>
-      <LetterViewModal
-        isOpen={isLetterViewModalOpen}
-        onClose={changeIsLetterViewModalOpen}
-        letterId='1'
-      />
     </div>
   );
 }
