@@ -18,12 +18,12 @@ export default function CustomModal({
 }: CustomModalProps) {
   useModal({ isOpen, onClose });
 
-  if (!isOpen) return null;
-
   return (
     <ModalPortal>
       <div
-        className={`${wrapperClassName} fixed inset-0 z-50`}
+        className={`${wrapperClassName} ${
+          isOpen ? 'fixed' : 'hidden'
+        } inset-0 z-50`}
         role='dialog'
         aria-modal='true'
       >
