@@ -22,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${neoDgm.variable} antialiased`}>
-        <main>
-          <Layout>{children}</Layout>
-        </main>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
