@@ -16,12 +16,15 @@ export default function LetterForm({ onSend }: LetterFormProps) {
   } = useLetterForm({ onSend });
 
   return (
-    <form className='h-full' onSubmit={handleSubmit}>
+    <form
+      className='h-full'
+      onSubmit={handleSubmit}
+    >
       <label className='mr-3 font-bold text-dark-brown lg:text-xl lg:leading-[20px]'>
         Email
       </label>
       <input
-        className='w-[70%] bg-transparent border-brown border-b-2 text-sm text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-[3px]'
+        className='w-[70%] bg-transparent border-brown border-b-2 text-sm text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
         placeholder='답장을 받을 이메일을 입력해주세요'
         value={email}
         onChange={handleEmailChange}
