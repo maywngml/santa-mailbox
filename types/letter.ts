@@ -1,1 +1,6 @@
 export type LetterStatusType = 'idle' | 'loading' | 'success' | 'failure';
+
+export interface LetterPayload {
+  email: string;
+  content: string;
+}
