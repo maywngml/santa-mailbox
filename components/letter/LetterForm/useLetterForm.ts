@@ -1,4 +1,6 @@
 import { ChangeEvent, useState, useCallback, FormEvent } from 'react';
+import { validate } from 'email-validator';
+import { useToastMessageContext } from '@/providers/ToastMessageProvider';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
   onSend: ({ email, content }: LetterPayload) => void;
@@ -11,6 +13,7 @@ export default function useLetterForm({
   onSuccess,
   onError,
 }: UseLetterFormProps) {
+  const { showToastMessage } = useToastMessageContext();
   const [email, setEmail] = useState<string>('');
   const [content, setContent] = useState<string>('');
 
@@ -27,7 +30,11 @@ export default function useLetterForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSend({ email, content });
+    if (!validate(email)) {
+      showToastMessage('이메일 주소가 올바르지 않습니다.');
+    } else {
+      onSend({ email, content });
+    }
   };
 
   return {
