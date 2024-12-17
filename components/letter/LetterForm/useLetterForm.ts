@@ -18,16 +18,21 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
           '이전에 작성한 편지가 있어요. 크리스마스에 메일함을 확인해주세요!'
         );
       } else {
-        onSend({ email, content });
+        onSend({ email, name, content });
       }
     },
     onError: (error) => showToastMessage(error.message),
   });
   const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [content, setContent] = useState<string>('');
 
   const handleEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+  }, []);
+
+  const handleNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   }, []);
 
   const handleContentChange = useCallback(
@@ -48,9 +53,11 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
 
   return {
     email,
+    name,
     content,
     isLoading: mutation.isPending,
     handleEmailChange,
+    handleNameChange,
     handleContentChange,
     handleSubmit,
   };
