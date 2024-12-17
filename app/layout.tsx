@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Providers from './providers';
 import { Layout } from '@/components/common';
+import { ToastMessageContainer } from '@/components/ui';
 import './globals.css';
 
 const neoDgm = localFont({
@@ -22,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${neoDgm.variable} antialiased`}>
-        <Layout>{children}</Layout>
+        <Providers>
+          <Layout>{children}</Layout>
+          <ToastMessageContainer />
+        </Providers>
       </body>
     </html>
   );
