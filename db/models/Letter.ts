@@ -3,6 +3,7 @@ import { Schema, model, models } from 'mongoose';
 interface Letter {
   id: string;
   email: string;
+  name: string;
   content: string;
   reply: string;
   createdAt: Date;
@@ -19,6 +20,10 @@ const LetterSchema = new Schema<Letter>(
       type: String,
       required: true,
       unique: true,
+    },
+    name: {
+      type: String,
+      required: true,
     },
     content: {
       type: String,
