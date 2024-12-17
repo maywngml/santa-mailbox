@@ -5,7 +5,7 @@ import type { LetterPayload } from '@/types/letter';
 interface LetterFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSend: ({ email, content }: LetterPayload) => void;
+  onSend: (payload: LetterPayload) => void;
 }
 
 export default function LetterFormModal({

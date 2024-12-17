@@ -4,7 +4,7 @@ import useLetterForm from './useLetterForm';
 import type { LetterPayload } from '@/types/letter';
 
 interface LetterFormProps {
-  onSend: ({ email, content }: LetterPayload) => void;
+  onSend: (payload: LetterPayload) => void;
 }
 
 export default function LetterForm({ onSend }: LetterFormProps) {

@@ -5,7 +5,7 @@ import { useToastMessageContext } from '@/providers/ToastMessageProvider';
 import { getLetter } from '@/api/letter';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
-  onSend: ({ email, content }: LetterPayload) => void;
+  onSend: (payload: LetterPayload) => void;
 }
 
 export default function useLetterForm({ onSend }: UseLetterFormProps) {
