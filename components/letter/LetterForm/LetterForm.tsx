@@ -1,9 +1,10 @@
 import { LetterTextArea } from '..';
 import { Button } from '@/components/ui';
 import useLetterForm from './useLetterForm';
+import type { LetterPayload } from '@/types/letter';
 
 interface LetterFormProps {
-  onSend: () => void;
+  onSend: ({ email, content }: LetterPayload) => void;
 }
 
 export default function LetterForm({ onSend }: LetterFormProps) {

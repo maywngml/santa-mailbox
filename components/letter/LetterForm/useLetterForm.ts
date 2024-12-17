@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, useCallback, FormEvent } from 'react';
-
+import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
-  onSend: () => void;
+  onSend: ({ email, content }: LetterPayload) => void;
   onSuccess?: () => void;
   onError?: () => void;
 }
@@ -25,11 +25,10 @@ export default function useLetterForm({
     []
   );
 
-  const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 편지 작성 여부 확인, 전송 확인 모달 띄우기
-    onSend();
-  }, []);
+    onSend({ email, content });
+  };
 
   return {
     email,

@@ -7,13 +7,12 @@ import {
   LetterStatusSuccessView,
 } from '@/components/home';
 import { LetterFormModal } from '@/components/letter';
-import type { LetterStatusType } from '@/types/letter';
+import type { LetterStatusType, LetterPayload } from '@/types/letter';
 
 export default function Home() {
   const [isLetterFormModalOpen, setIsLetterFormModalOpen] =
     useState<boolean>(false);
   const [letterStatus, setLetterStatus] = useState<LetterStatusType>('idle');
-
   const changeIsLetterFormModalOpen = () => {
     setIsLetterFormModalOpen(
       (prevIsLetterFormModalOpen) => !prevIsLetterFormModalOpen
@@ -24,9 +23,11 @@ export default function Home() {
     changeIsLetterFormModalOpen();
   }, []);
 
-  const handleLetterSend = () => {
-    setLetterStatus('loading');
-    changeIsLetterFormModalOpen();
+  const handleLetterSend = ({ email, content }: LetterPayload) => {
+    // TODO: 편지 작성 여부 확인, 전송 확인 모달 띄우기
+    // setLetterStatus('loading');
+    // changeIsLetterFormModalOpen();
+    console.log(email, content);
   };
 
   return (
