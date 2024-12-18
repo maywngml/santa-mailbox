@@ -1,17 +1,23 @@
 import fetchAPI from '@/lib/fetchAPI';
 import CryptoJS from 'crypto-js';
-import type { LetterPayload } from '@/types/letter';
+import type { LetterPayload, LetterResponse } from '@/types/letter';
 
-export async function getLetter(email: string) {
-  const encryptedEmail = CryptoJS.AES.encrypt(
-    email,
-    process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string
-  ).toString();
-  const encodedEncryptedEmail = encodeURIComponent(encryptedEmail);
+export async function getLetter(
+  email: string,
+  isEncrypted: boolean = false
+): Promise<LetterResponse> {
+  const encryptedEmail = isEncrypted
+    ? email
+    : encodeURIComponent(
+        CryptoJS.AES.encrypt(
+          email,
+          process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string
+        ).toString()
+      );
 
   return fetchAPI({
     method: 'GET',
-    url: `/letter?email=${encodedEncryptedEmail}`,
+    url: `/letter?email=${encryptedEmail}`,
   });
 }
 
