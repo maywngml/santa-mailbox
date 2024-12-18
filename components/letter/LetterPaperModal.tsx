@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { CustomModal } from '../ui';
+import { ModalContainer } from '../ui';
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
 
 interface LetterPaperModalProps {
@@ -14,7 +14,7 @@ export default function LetterPaperModal({
   onClose,
 }: LetterPaperModalProps) {
   return (
-    <CustomModal
+    <ModalContainer
       isOpen={isOpen}
       onClose={onClose}
       wrapperClassName='flex items-end justify-center'
@@ -29,6 +29,6 @@ export default function LetterPaperModal({
         />
         {children}
       </div>
-    </CustomModal>
+    </ModalContainer>
   );
 }

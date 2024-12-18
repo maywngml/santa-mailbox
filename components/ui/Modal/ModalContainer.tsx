@@ -3,19 +3,19 @@ import ModalOverlay from './ModalOverlay';
 import ModalPortal from './ModalPortal';
 import { useModal } from '@/hooks';
 
-interface CustomModalProps {
+interface ModalContainerProps {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
   wrapperClassName?: string;
 }
 
-export default function CustomModal({
+export default function ModalContainer({
   children,
   isOpen,
   onClose,
   wrapperClassName,
-}: CustomModalProps) {
+}: ModalContainerProps) {
   useModal({ isOpen, onClose });
 
   return (
