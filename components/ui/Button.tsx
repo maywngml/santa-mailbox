@@ -7,11 +7,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
 }
 
-function Button({ className, children, isLoading }: ButtonProps) {
-  const baseClassName = `${className} flex items-center justify-center py-2 bg-dark-green rounded-[10px] lg:py-3`;
+function Button({ className, children, isLoading, ...props }: ButtonProps) {
+  const baseClassName = `${className} flex items-center justify-center py-2 bg-dark-green rounded-[10px] disabled:cursor-not-allowed lg:py-3`;
 
   return (
-    <button className={baseClassName}>
+    <button
+      className={baseClassName}
+      disabled={isLoading}
+      {...props}
+    >
       {isLoading ? <LoadingSpinner /> : children}
     </button>
   );
