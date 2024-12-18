@@ -1,8 +1,10 @@
 'use client';
 import { Fragment, useCallback, useRef } from 'react';
 import { SoundToggleButton } from '@/components/ui';
+import { useToastMessageContext } from '@/providers/ToastMessageProvider';
 
 export default function BgmController() {
+  const { showToastMessage } = useToastMessageContext();
   const soundRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSoundOnClick = useCallback(() => {
@@ -15,8 +17,7 @@ export default function BgmController() {
     try {
       await soundRef.current.play();
     } catch (error) {
-      // TODO: 노래를 재생할 수 없습니다. 토스트 메세지 띄우기
-      console.error({ error });
+      showToastMessage('노래를 재생할 수 없습니다.');
     }
   }, []);
   return (
