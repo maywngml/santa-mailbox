@@ -14,7 +14,7 @@ export default function Footer() {
         <p className='lg:text-lg'>산타 우체통</p>
       </div>
       <address className='text-xs not-italic lg:text-sm'>
-        문의: sjuhee9712@gmail.com
+        문의: admin@www.santa-mailbox.site
       </address>
       <p className='text-xs lg:text-sm'>
         본 사이트에 사용된 루돌프 이미지를 제외한 모든 아이콘의 저작권은 Freepik
@@ -43,12 +43,20 @@ export default function Footer() {
         <li
           className={`relative text-xs after:absolute after:-right-[9px] after:content-['|'] lg:text-sm lg:after:-right-3`}
         >
-          <Link className='underline' href='/' target='_blank'>
+          <Link
+            className='underline'
+            href='/'
+            target='_blank'
+          >
             개인정보처리방침
           </Link>
         </li>
         <li className='text-xs lg:text-sm'>
-          <Link className='underline' href='/' target='_blank'>
+          <Link
+            className='underline'
+            href='/'
+            target='_blank'
+          >
             서비스이용약관
           </Link>
         </li>
