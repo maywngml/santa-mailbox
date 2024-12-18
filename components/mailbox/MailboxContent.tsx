@@ -2,11 +2,17 @@
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { LetterViewModal } from '@/components/letter';
+import { getLetter } from '@/api/letter';
 
 export default function MailboxContent() {
   const searchParams = useSearchParams();
-  const letterId = searchParams.get('letterId');
+  const letterId = searchParams.get('letterId') || '';
+  const letterResponse = useQuery({
+    queryKey: ['letter'],
+    queryFn: () => getLetter(letterId, true),
+  });
   const [isLetterViewModalOpen, setIsLetterViewModalOpen] =
     useState<boolean>(false);
   const information = [
@@ -21,7 +27,7 @@ export default function MailboxContent() {
   };
 
   const handleCardClick = () => {
-    if (!letterId) return;
+    if (!letterResponse.data?.letter) return;
     changeIsLetterViewModalOpen();
   };
 
@@ -29,7 +35,7 @@ export default function MailboxContent() {
     <Fragment>
       <div
         className={`relative mobile:w-[200px] mobile:h-[200px] w-[400px] h-[400px] ${
-          letterId && 'hover:cursor-pointer hover:scale-110'
+          letterResponse.data?.letter && 'hover:cursor-pointer hover:scale-110'
         }`}
         onClick={handleCardClick}
       >
@@ -42,16 +48,16 @@ export default function MailboxContent() {
         ></Image>
       </div>
       <p className='mt-2 text-sm lg:mt-4 lg:text-lg'>
-        {letterId ? information[0][0] : information[1][0]}
+        {letterResponse.data?.letter ? information[0][0] : information[1][0]}
         <span className='block'>
-          {letterId ? information[0][1] : information[1][1]}
+          {letterResponse.data?.letter ? information[0][1] : information[1][1]}
         </span>
       </p>
-      {isLetterViewModalOpen && letterId && (
+      {isLetterViewModalOpen && letterResponse.data?.letter && (
         <LetterViewModal
           isOpen={isLetterViewModalOpen}
           onClose={changeIsLetterViewModalOpen}
-          letterId={letterId}
+          letter={letterResponse.data?.letter.reply}
         />
       )}
     </Fragment>
