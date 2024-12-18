@@ -1,7 +1,14 @@
+'use client';
 import Image from 'next/image';
 import { Button } from '../../ui';
 
-export default function LetterStatusFailureView() {
+interface LetterStatusFailureViewProps {
+  onResend: () => void;
+}
+
+export default function LetterStatusFailureView({
+  onResend,
+}: LetterStatusFailureViewProps) {
   return (
     <div className='mobile:w-[90vw] mobile:max-w-[400px] flex flex-col items-center gap-3'>
       <div className='relative mobile:w-[150px] mobile:h-[210px] w-[250px] h-[350px]'>
@@ -20,7 +27,12 @@ export default function LetterStatusFailureView() {
           관리자에게 문의해주세요
         </span>
       </p>
-      <Button className='px-3 text-sm lg:px-5 lg:text-lg'>재전송</Button>
+      <Button
+        className='px-3 text-sm lg:px-5 lg:text-lg'
+        onClick={onResend}
+      >
+        재전송
+      </Button>
     </div>
   );
 }
