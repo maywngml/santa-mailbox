@@ -13,7 +13,7 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const mutation = useMutation({
     mutationFn: (email: string) => getLetter(email),
     onSuccess: (data) => {
-      if (data.hasLetter) {
+      if (data.letter) {
         showToastMessage(
           '이전에 작성한 편지가 있어요. 크리스마스에 메일함을 확인해주세요!'
         );

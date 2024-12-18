@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        hasLetter: !!letter,
+        letter: letter,
       },
       { status: 200 }
     );
@@ -76,6 +76,7 @@ export async function POST(request: NextRequest) {
     });
 
     console.log('post letter api gpt', gptResponse);
+    console.log('post letter api gpt', gptResponse.choices[0].message);
 
     const letterId = encodeURIComponent(email);
     const dbResponse = await new LetterModel({
@@ -116,10 +117,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      error: null,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        error: null,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('post letter api error', error);
     return NextResponse.json(
