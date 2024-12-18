@@ -78,7 +78,12 @@ export async function POST(request: NextRequest) {
     console.log('post letter api gpt', gptResponse);
     console.log('post letter api gpt', gptResponse.choices[0].message);
 
-    const letterId = encodeURIComponent(email);
+    const letterId = encodeURIComponent(
+      CryptoJS.AES.encrypt(
+        email,
+        process.env.CRYPTO_SECRET_KEY as string
+      ).toString()
+    );
     const dbResponse = await new LetterModel({
       ...body,
       id: letterId,
@@ -92,7 +97,7 @@ export async function POST(request: NextRequest) {
     const mailResponse = await mailchimpTx.messages.send({
       message: {
         to: [{ email: email, type: 'to' }],
-        html: `<p>드디어 기다리던 크리스마스가 시작됐어요!</p><p>산타 할아버지에게서 특별한 답장이 도착했다는데요!</p><p>지금 바로 확인해보러 가볼까요?</p><a href='https://santa-mailbox.site?letterId=${letterId}'>👉[답장 확인하러 가기]</a><p>산타 할아버지의 마음이 담긴 답장과 함께</p><p>행복이 가득한 크리스마스를 보내시길 바래요.</p><p>올 한해도 고생 많으셨습니다💗 메리 크리스마스!🎄✨</p>`,
+        html: `<p>드디어 기다리던 크리스마스가 시작됐어요!</p><p>산타 할아버지에게서 특별한 답장이 도착했다는데요!</p><p>지금 바로 확인해보러 가볼까요?</p><a href='https://santa-mailbox.site/mailbox?letterId=${letterId}'>👉[답장 확인하러 가기]</a><p>산타 할아버지의 마음이 담긴 답장과 함께</p><p>행복이 가득한 크리스마스를 보내시길 바래요.</p><p>올 한해도 고생 많으셨습니다💗 메리 크리스마스!🎄✨</p>`,
         subject: '산타 할아버지의 답장이 도착했어요💌',
         from_email: 'admin@santa-mailbox.site',
         from_name: '산타 우체통📮',
