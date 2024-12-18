@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useCallback, FormEvent } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { validate } from 'email-validator';
 import { useToastMessageContext } from '@/providers/ToastMessageProvider';
-import { getLetter } from '@/api/letter';
+import { getLetter } from '@/lib/letter';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
   onSend: (payload: LetterPayload) => void;

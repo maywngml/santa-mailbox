@@ -8,7 +8,7 @@ import {
   LetterStatusSuccessView,
 } from '@/components/home';
 import { LetterFormModal } from '@/components/letter';
-import { postLetter } from '@/api/letter';
+import { postLetter } from '@/lib/letter';
 import type { LetterPayload } from '@/types/letter';
 
 export default function Home() {

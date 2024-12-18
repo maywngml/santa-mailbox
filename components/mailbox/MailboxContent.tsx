@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { LetterViewModal } from '@/components/letter';
-import { getLetter } from '@/api/letter';
+import { getLetter } from '@/lib/letter';
 
 export default function MailboxContent() {
   const searchParams = useSearchParams();
