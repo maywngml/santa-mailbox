@@ -45,7 +45,7 @@ export default function Footer() {
         >
           <Link
             className='underline'
-            href='/'
+            href='https://santamailbox.super.site/%ea%b0%9c%ec%9d%b8%ec%a0%95%eb%b3%b4%ec%b2%98%eb%a6%ac%eb%b0%a9%ec%b9%a8'
             target='_blank'
           >
             개인정보처리방침
@@ -54,7 +54,7 @@ export default function Footer() {
         <li className='text-xs lg:text-sm'>
           <Link
             className='underline'
-            href='/'
+            href='https://santamailbox.super.site/%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9d%b4%ec%9a%a9%ec%95%bd%ea%b4%80'
             target='_blank'
           >
             서비스이용약관
