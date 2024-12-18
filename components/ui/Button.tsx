@@ -8,7 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function Button({ className, children, isLoading, ...props }: ButtonProps) {
-  const baseClassName = `${className} flex items-center justify-center py-2 bg-dark-green rounded-[10px] disabled:cursor-not-allowed lg:py-3`;
+  const baseClassName = `${className} flex items-center justify-center py-2 bg-dark-green rounded-[10px] disabled:opacity-70 disabled:cursor-not-allowed lg:py-3`;
 
   return (
     <button
