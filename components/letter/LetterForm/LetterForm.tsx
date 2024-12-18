@@ -52,11 +52,11 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         value={content}
         onChange={handleContentChange}
       />
-      {/* TODO: 이메일, 내용 다 입력해야 버튼 활성화 */}
       <Button
         className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2  text-sm lg:w-[120px] lg:bottom-5 lg:text-lg'
         type='submit'
         isLoading={isLoading}
+        disabled={!(email && name && content)}
       >
         작성 완료
       </Button>
