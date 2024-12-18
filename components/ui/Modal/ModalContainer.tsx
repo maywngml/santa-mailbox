@@ -7,6 +7,7 @@ interface ModalContainerProps {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  keepMounted?: boolean;
   wrapperClassName?: string;
 }
 
@@ -14,16 +15,18 @@ export default function ModalContainer({
   children,
   isOpen,
   onClose,
+  keepMounted,
   wrapperClassName,
 }: ModalContainerProps) {
   useModal({ isOpen, onClose });
+  const visibilityClass = keepMounted ? (isOpen ? 'fixed' : 'hidden') : 'fixed';
+
+  if (!keepMounted && !isOpen) return null;
 
   return (
     <ModalPortal>
       <div
-        className={`${wrapperClassName} ${
-          isOpen ? 'fixed' : 'hidden'
-        } inset-0 z-50`}
+        className={`${wrapperClassName} ${visibilityClass} inset-0 z-50`}
         role='dialog'
         aria-modal='true'
       >
