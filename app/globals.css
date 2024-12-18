@@ -44,3 +44,12 @@ textarea:focus {
   outline: none;
   box-shadow: none;
 }
+
+::-moz-selection {
+  background: var(--light-green);
+  color: #fff;
+}
+::selection {
+  background: var(--light-green);
+  color: #fff;
+}
