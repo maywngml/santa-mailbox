@@ -1,6 +1,6 @@
 import fetchAPI from '@/lib/fetchAPI';
-import CryptoJS from 'crypto-js';
 import type { LetterPayload, LetterResponse } from '@/types/letter';
+import { getEncryptedText } from '@/lib/helpers';
 
 export async function getLetter(
   email: string,
@@ -9,10 +9,10 @@ export async function getLetter(
   const encryptedEmail = isEncrypted
     ? email
     : encodeURIComponent(
-        CryptoJS.AES.encrypt(
+        getEncryptedText(
           email,
           process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string
-        ).toString()
+        )
       );
 
   return fetchAPI({
