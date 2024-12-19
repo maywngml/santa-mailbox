@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { validate } from 'email-validator';
 import { useToastMessageContext } from '@/providers/ToastMessageProvider';
 import { getLetter } from '@/lib/letter';
+import { getEmailVerification } from '@/lib/emailVerification';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
   onSend: (payload: LetterPayload) => void;
@@ -10,7 +11,7 @@ interface UseLetterFormProps {
 
 export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const { showToastMessage } = useToastMessageContext();
-  const mutation = useMutation({
+  const letterMutation = useMutation({
     mutationFn: (email: string) => getLetter(email),
     onSuccess: (data) => {
       if (data.letter) {
@@ -19,6 +20,20 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
         );
       } else {
         onSend({ email, name, content });
+      }
+    },
+    onError: (error) => showToastMessage(error.message),
+  });
+  const verificationMutation = useMutation({
+    mutationFn: (email: string) => getEmailVerification(email),
+    onSuccess: (data) => {
+      if (data.result?.isVerified) {
+        showToastMessage('이미 이메일 인증을 진행하셨습니다.');
+      } else {
+        // TODO: 인증 메일 발송
+        showToastMessage(
+          '인증 메일을 발송했습니다. 이메일 인증을 완료해주세요.'
+        );
       }
     },
     onError: (error) => showToastMessage(error.message),
@@ -44,10 +59,18 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validate(email)) {
-      showToastMessage('이메일 주소가 올바르지 않습니다.');
+    if (validate(email)) {
+      letterMutation.mutate(email);
     } else {
-      mutation.mutate(email);
+      showToastMessage('이메일 주소가 올바르지 않습니다.');
+    }
+  };
+
+  const handleVerify = () => {
+    if (validate(email)) {
+      verificationMutation.mutate(email);
+    } else {
+      showToastMessage('이메일 주소가 올바르지 않습니다.');
     }
   };
 
@@ -55,10 +78,12 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     email,
     name,
     content,
-    isLoading: mutation.isPending,
+    isVerifying: verificationMutation.isPending,
+    isSending: letterMutation.isPending,
     handleEmailChange,
     handleNameChange,
     handleContentChange,
     handleSubmit,
+    handleVerify,
   };
 }

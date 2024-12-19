@@ -12,10 +12,12 @@ export default function LetterForm({ onSend }: LetterFormProps) {
     email,
     name,
     content,
-    isLoading,
+    isVerifying,
+    isSending,
     handleEmailChange,
     handleNameChange,
     handleContentChange,
+    handleVerify,
     handleSubmit,
   } = useLetterForm({ onSend });
 
@@ -34,7 +36,12 @@ export default function LetterForm({ onSend }: LetterFormProps) {
           value={email}
           onChange={handleEmailChange}
         ></input>
-        <Button className='ml-2 py-[6px] w-[54px] text-base lg:w-[70px] lg:py-[6px] lg:text-lg'>
+        <Button
+          className='ml-2 py-[6px] w-[54px] text-base lg:w-[70px] lg:py-[6px] lg:text-lg'
+          type='button'
+          isLoading={isVerifying}
+          onClick={handleVerify}
+        >
           인증
         </Button>
       </div>
@@ -58,7 +65,7 @@ export default function LetterForm({ onSend }: LetterFormProps) {
       <Button
         className='absolute left-1/2 bottom-4 w-24 -translate-x-1/2  text-base lg:w-[120px] lg:bottom-5 lg:text-lg'
         type='submit'
-        isLoading={isLoading}
+        isLoading={isSending}
         disabled={!(email && name && content)}
       >
         작성 완료
