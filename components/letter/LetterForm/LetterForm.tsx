@@ -24,23 +24,26 @@ export default function LetterForm({ onSend }: LetterFormProps) {
       className='h-full'
       onSubmit={handleSubmit}
     >
-      <div className='mb-2 lg:mb-[10px]'>
-        <label className='inline-block w-[48px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
+      <div className='flex h-10 items-center lg:mb-0 lg:h-[40px]'>
+        <label className='inline-block w-[50px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
           이메일
         </label>
         <input
-          className='w-[70%] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
+          className='w-[calc(100%-118px)] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[calc(100%-150px)] lg:text-xl lg:border-b-2'
           placeholder='답장을 받을 이메일을 입력해주세요'
           value={email}
           onChange={handleEmailChange}
         ></input>
+        <Button className='ml-2 py-[6px] w-[54px] text-base lg:w-[70px] lg:py-[6px] lg:text-lg'>
+          인증
+        </Button>
       </div>
-      <div>
-        <label className='inline-block w-[48px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
+      <div className='flex items-center h-10 lg:h-[40px]'>
+        <label className='inline-block w-[50px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
           이름
         </label>
         <input
-          className='w-[70%] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
+          className='w-[calc(100%-52px)] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[calc(100%-72px)] lg:text-xl lg:border-b-2'
           placeholder='이름을 입력해주세요'
           value={name}
           onChange={handleNameChange}
@@ -53,7 +56,7 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         onChange={handleContentChange}
       />
       <Button
-        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2  text-base lg:w-[120px] lg:bottom-5 lg:text-lg'
+        className='absolute left-1/2 bottom-4 w-24 -translate-x-1/2  text-base lg:w-[120px] lg:bottom-5 lg:text-lg'
         type='submit'
         isLoading={isLoading}
         disabled={!(email && name && content)}

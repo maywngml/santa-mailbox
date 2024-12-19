@@ -19,9 +19,9 @@ export default {
         'mobile-lined-paper': `repeating-linear-gradient(
           to bottom,
           var(--beige),
-          var(--beige) 26px,
-          var(--brown) 26px,
-          var(--brown) 28px
+          var(--beige) 28px,
+          var(--brown) 28px,
+          var(--brown) 30px
         )`,
       },
       colors: {
