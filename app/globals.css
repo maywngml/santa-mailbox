@@ -45,6 +45,10 @@ textarea:focus {
   box-shadow: none;
 }
 
+textarea:disabled {
+  opacity: 1;
+}
+
 ::-moz-selection {
   background: var(--light-green);
   color: #fff;
