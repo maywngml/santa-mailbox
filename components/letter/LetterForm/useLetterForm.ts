@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { validate } from 'email-validator';
 import { useToastMessageContext } from '@/providers/ToastMessageProvider';
 import { getLetter } from '@/lib/letter';
-import { getEmailVerification } from '@/lib/emailVerification';
+import { postVerificationEmail } from '@/lib/emailVerification';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
   onSend: (payload: LetterPayload) => void;
@@ -11,6 +11,7 @@ interface UseLetterFormProps {
 
 export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const { showToastMessage } = useToastMessageContext();
+  // TODO: 이메일 인증 여부도 같이 한번 더 확인해야함
   const checkOrSendLetter = useMutation({
     mutationFn: (email: string) => getLetter(email),
     onSuccess: (data) => {
@@ -24,17 +25,10 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     },
     onError: (error) => showToastMessage(error.message),
   });
-  const checkEmailVerification = useMutation({
-    mutationFn: (email: string) => getEmailVerification(email),
-    onSuccess: (data) => {
-      if (data.result?.isVerified) {
-        showToastMessage('이미 이메일 인증을 진행하셨습니다.');
-      } else {
-        // TODO: 인증 메일 발송
-        showToastMessage(
-          '인증 메일을 발송했습니다. 이메일 인증을 완료해주세요.'
-        );
-      }
+  const sendVerificationEmail = useMutation({
+    mutationFn: (email: string) => postVerificationEmail(email),
+    onSuccess: () => {
+      showToastMessage('인증 메일을 발송했습니다. 이메일 인증을 완료해주세요.');
     },
     onError: (error) => showToastMessage(error.message),
   });
@@ -66,9 +60,9 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     }
   };
 
-  const handleEmailCheck = () => {
+  const handleEmailVerify = () => {
     if (validate(email)) {
-      checkEmailVerification.mutate(email);
+      sendVerificationEmail.mutate(email);
     } else {
       showToastMessage('이메일 주소가 올바르지 않습니다.');
     }
@@ -78,12 +72,12 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     email,
     name,
     content,
-    isChecking: checkEmailVerification.isPending,
+    isVerifying: sendVerificationEmail.isPending,
     isSending: checkOrSendLetter.isPending,
     handleEmailChange,
     handleNameChange,
     handleContentChange,
     handleSubmit,
-    handleEmailCheck,
+    handleEmailVerify,
   };
 }

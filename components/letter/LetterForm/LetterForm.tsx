@@ -12,12 +12,12 @@ export default function LetterForm({ onSend }: LetterFormProps) {
     email,
     name,
     content,
-    isChecking,
+    isVerifying,
     isSending,
     handleEmailChange,
     handleNameChange,
     handleContentChange,
-    handleEmailCheck,
+    handleEmailVerify,
     handleSubmit,
   } = useLetterForm({ onSend });
 
@@ -39,8 +39,8 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         <Button
           className='ml-2 py-[6px] w-[54px] text-base lg:w-[70px] lg:py-[6px] lg:text-lg'
           type='button'
-          isLoading={isChecking}
-          onClick={handleEmailCheck}
+          isLoading={isVerifying}
+          onClick={handleEmailVerify}
         >
           인증
         </Button>
