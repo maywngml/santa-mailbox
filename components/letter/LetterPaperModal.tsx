@@ -20,7 +20,7 @@ export default function LetterPaperModal({
       keepMounted={true}
       wrapperClassName='flex items-end justify-center'
     >
-      <div className='relative mx-auto p-4 w-[90vw] max-w-[1000px] h-[80vh] max-h-[1500px] rounded-tl-[20px] rounded-tr-[20px] bg-beige animate-letterSlideUp lg:p-8 lg:w-[60vw]'>
+      <div className='relative mx-auto p-4 w-screen max-w-[1000px] h-[80vh] max-h-[1500px] rounded-tl-[20px] rounded-tr-[20px] bg-beige animate-letterSlideUp lg:p-8 lg:w-[60vw]'>
         <XMarkIcon
           className='absolute top-4 right-4 hover:cursor-pointer'
           width={30}
