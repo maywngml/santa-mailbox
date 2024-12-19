@@ -39,6 +39,11 @@ img {
   -ms-user-select: none;
 }
 
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
 input:focus,
 textarea:focus {
   outline: none;
