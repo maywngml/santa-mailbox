@@ -30,7 +30,7 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         </label>
         <input
           className='w-[calc(100%-118px)] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[calc(100%-150px)] lg:text-xl lg:border-b-2'
-          placeholder='답장을 받을 이메일을 입력해주세요'
+          placeholder='이메일을 입력해주세요'
           value={email}
           onChange={handleEmailChange}
         ></input>
