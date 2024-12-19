@@ -20,3 +20,14 @@ export async function getEmailVerification(
     url: `/email-verification?email=${encryptedEmail}`,
   });
 }
+
+export async function postVerificationEmail(email: string) {
+  const encryptedEmail = encodeURIComponent(
+    getEncryptedText(email, process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string)
+  );
+
+  return fetchAPI({
+    method: 'POST',
+    url: `/verify/email?email=${encryptedEmail}`,
+  });
+}
