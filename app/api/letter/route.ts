@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import Mailchimp from '@mailchimp/mailchimp_transactional';
 import CryptoJS from 'crypto-js';
 import connectDB from '@/db/connectDB';
 import { LetterModel } from '@/db/models/Letter';
-import { AxiosError } from 'axios';
+import { getEncryptedText, getDecryptedText } from '@/lib/helpers';
 
 export async function GET(request: NextRequest) {
   try {
@@ -24,11 +23,7 @@ export async function GET(request: NextRequest) {
     }
 
     const decodedEncryptedEmail = decodeURIComponent(encryptedEmail);
-    const bytes = CryptoJS.AES.decrypt(
-      decodedEncryptedEmail,
-      process.env.CRYPTO_SECRET_KEY as string
-    );
-    const email = bytes.toString(CryptoJS.enc.Utf8);
+    const email = getDecryptedText(decodedEncryptedEmail);
     const letter = await LetterModel.findOne({ email });
 
     console.log({ letter });
@@ -79,10 +74,7 @@ export async function POST(request: NextRequest) {
     console.log('post letter api gpt', gptResponse.choices[0].message);
 
     const letterId = encodeURIComponent(
-      CryptoJS.AES.encrypt(
-        email,
-        process.env.CRYPTO_SECRET_KEY as string
-      ).toString()
+      getEncryptedText(email, process.env.CRYPTO_SECRET_KEY as string)
     );
     const dbResponse = await new LetterModel({
       ...body,
@@ -92,35 +84,6 @@ export async function POST(request: NextRequest) {
     }).save();
 
     console.log('post letter api db', dbResponse);
-
-    const mailchimpTx = Mailchimp(process.env.MAILCHIMP_API_KEY as string);
-    const mailResponse = await mailchimpTx.messages.send({
-      message: {
-        to: [{ email: email, type: 'to' }],
-        html: `<p>드디어 기다리던 크리스마스가 시작됐어요!</p><p>산타 할아버지에게서 특별한 답장이 도착했다는데요!</p><p>지금 바로 확인해보러 가볼까요?</p><a href='https://santa-mailbox.site/mailbox?letterId=${letterId}'>👉[답장 확인하러 가기]</a><p>산타 할아버지의 마음이 담긴 답장과 함께</p><p>행복이 가득한 크리스마스를 보내시길 바래요.</p><p>올 한해도 고생 많으셨습니다💗 메리 크리스마스!🎄✨</p>`,
-        subject: '산타 할아버지의 답장이 도착했어요💌',
-        from_email: 'admin@santa-mailbox.site',
-        from_name: '산타 우체통📮',
-      },
-      send_at: '2024-12-24 15:00:00',
-    });
-
-    console.log('post letter api mail', mailResponse);
-
-    if (
-      !(mailResponse instanceof AxiosError) &&
-      (mailResponse[0].status === 'invalid' ||
-        mailResponse[0].status === 'rejected')
-    ) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            '편지를 보내던 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
-        },
-        { status: 500 }
-      );
-    }
 
     return NextResponse.json(
       {
