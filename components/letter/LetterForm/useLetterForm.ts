@@ -11,7 +11,7 @@ interface UseLetterFormProps {
 
 export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const { showToastMessage } = useToastMessageContext();
-  const letterMutation = useMutation({
+  const checkOrSendLetter = useMutation({
     mutationFn: (email: string) => getLetter(email),
     onSuccess: (data) => {
       if (data.letter) {
@@ -24,7 +24,7 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     },
     onError: (error) => showToastMessage(error.message),
   });
-  const verificationMutation = useMutation({
+  const checkEmailVerification = useMutation({
     mutationFn: (email: string) => getEmailVerification(email),
     onSuccess: (data) => {
       if (data.result?.isVerified) {
@@ -60,15 +60,15 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate(email)) {
-      letterMutation.mutate(email);
+      checkOrSendLetter.mutate(email);
     } else {
       showToastMessage('이메일 주소가 올바르지 않습니다.');
     }
   };
 
-  const handleVerify = () => {
+  const handleEmailCheck = () => {
     if (validate(email)) {
-      verificationMutation.mutate(email);
+      checkEmailVerification.mutate(email);
     } else {
       showToastMessage('이메일 주소가 올바르지 않습니다.');
     }
@@ -78,12 +78,12 @@ export default function useLetterForm({ onSend }: UseLetterFormProps) {
     email,
     name,
     content,
-    isVerifying: verificationMutation.isPending,
-    isSending: letterMutation.isPending,
+    isChecking: checkEmailVerification.isPending,
+    isSending: checkOrSendLetter.isPending,
     handleEmailChange,
     handleNameChange,
     handleContentChange,
     handleSubmit,
-    handleVerify,
+    handleEmailCheck,
   };
 }
