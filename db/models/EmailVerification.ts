@@ -2,12 +2,18 @@ import { Schema, model, models } from 'mongoose';
 
 interface EmailVerification {
   email: string;
+  verificationToken: string;
   isVerified: boolean;
   createdAt: Date;
 }
 
 const EmailVerificationSchema = new Schema<EmailVerification>({
   email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  verificationToken: {
     type: String,
     required: true,
     unique: true,
