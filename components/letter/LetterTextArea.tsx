@@ -16,7 +16,7 @@ export default function LetterTextArea({
   if (isOutgoing) {
     return (
       <textarea
-        className={`${className} w-full h-[80%] border-none text-sm leading-[28px] text-dark-brown bg-mobile-lined-paper bg-[size:100%_28px] bg-local placeholder-light-brown resize-none lg:text-xl boreder-none lg:leading-[40px] lg:bg-pc-lined-paper lg:bg-[size:100%_40px]`}
+        className={`${className} w-full h-[80%] border-none text-base leading-[28px] text-dark-brown bg-mobile-lined-paper bg-[size:100%_28px] bg-local placeholder-light-brown resize-none lg:text-xl boreder-none lg:leading-[40px] lg:bg-pc-lined-paper lg:bg-[size:100%_40px]`}
         placeholder='산타할아버지에게 편지를 작성해보세요'
         disabled={false}
         maxLength={500}
@@ -26,7 +26,7 @@ export default function LetterTextArea({
   } else {
     return (
       <textarea
-        className={`${className} w-full h-[80%] border-none text-sm leading-[28px] text-dark-brown bg-mobile-lined-paper bg-[size:100%_28px] bg-local placeholder-light-brown resize-none lg:text-xl boreder-none lg:leading-[40px] lg:bg-pc-lined-paper lg:bg-[size:100%_40px]`}
+        className={`${className} w-full h-[80%] border-none text-base leading-[28px] text-dark-brown bg-mobile-lined-paper bg-[size:100%_28px] bg-local placeholder-light-brown resize-none lg:text-xl boreder-none lg:leading-[40px] lg:bg-pc-lined-paper lg:bg-[size:100%_40px]`}
         defaultValue={letter}
         disabled={true}
         {...props}

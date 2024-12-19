@@ -25,22 +25,22 @@ export default function LetterForm({ onSend }: LetterFormProps) {
       onSubmit={handleSubmit}
     >
       <div className='mb-2 lg:mb-[10px]'>
-        <label className='inline-block w-[48px] mr-1 text-sm text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
+        <label className='inline-block w-[48px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
           이메일
         </label>
         <input
-          className='w-[70%] bg-transparent border-brown border-b-2 text-sm text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
+          className='w-[70%] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
           placeholder='답장을 받을 이메일을 입력해주세요'
           value={email}
           onChange={handleEmailChange}
         ></input>
       </div>
       <div>
-        <label className='inline-block w-[48px] mr-1 text-sm text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
+        <label className='inline-block w-[48px] mr-1 text-base text-dark-brown lg:mr-2 lg:w-[64px] lg:text-xl lg:leading-[20px]'>
           이름
         </label>
         <input
-          className='w-[70%] bg-transparent border-brown border-b-2 text-sm text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
+          className='w-[70%] bg-transparent border-brown border-b-2 text-base text-dark-brown placeholder:text-light-brown lg:w-[80%] lg:text-xl lg:border-b-2'
           placeholder='이름을 입력해주세요'
           value={name}
           onChange={handleNameChange}
@@ -53,7 +53,7 @@ export default function LetterForm({ onSend }: LetterFormProps) {
         onChange={handleContentChange}
       />
       <Button
-        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2  text-sm lg:w-[120px] lg:bottom-5 lg:text-lg'
+        className='absolute left-1/2 bottom-3 w-24 -translate-x-1/2  text-base lg:w-[120px] lg:bottom-5 lg:text-lg'
         type='submit'
         isLoading={isLoading}
         disabled={!(email && name && content)}
