@@ -11,7 +11,7 @@ export default function ToastMessageItem({
 
   return (
     <div
-      className='px-4 py-3 rounded-[10px] bg-light-green text-sm lg:p-4 lg:text-lg'
+      className='px-4 py-3 rounded-[10px] bg-light-green text-sm break-keep lg:p-4 lg:text-lg'
       key={`toast-message-${id}`}
     >
       <p>{message}</p>
