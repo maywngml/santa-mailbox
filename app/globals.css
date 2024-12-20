@@ -30,6 +30,15 @@ body {
   overflow-x: hidden !important;
 }
 
+body::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url('/images/deer-christmas.gif');
+}
+
 img {
   user-drag: none;
   -webkit-user-drag: none;
