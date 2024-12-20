@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import CryptoJS from 'crypto-js';
 import connectDB from '@/db/connectDB';
 import { LetterModel } from '@/db/models/Letter';
 import { getEncryptedText, getDecryptedText } from '@/lib/helpers';
@@ -53,6 +52,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+
     const body = await request.json();
     const { email, name, content } = body;
     const openai = new OpenAI({
