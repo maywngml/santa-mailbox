@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useCallback, FormEvent } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { validate } from 'email-validator';
 import { useToastMessageContext } from '@/providers/ToastMessageProvider';
-import { getLetter } from '@/lib/letter';
+import { checkEmailAndLetter } from '@/lib/emailAndLetter';
 import { postVerificationEmail } from '@/lib/emailVerification';
 import type { LetterPayload } from '@/types/letter';
 interface UseLetterFormProps {
@@ -11,11 +11,12 @@ interface UseLetterFormProps {
 
 export default function useLetterForm({ onSend }: UseLetterFormProps) {
   const { showToastMessage } = useToastMessageContext();
-  // TODO: 이메일 인증 여부도 같이 한번 더 확인해야함
   const checkOrSendLetter = useMutation({
-    mutationFn: (email: string) => getLetter(email),
+    mutationFn: (email: string) => checkEmailAndLetter(email),
     onSuccess: (data) => {
-      if (data.letter) {
+      if (!data.isVerified) {
+        showToastMessage('이메일 인증을 먼저 진행해주세요.');
+      } else if (data.hasLetter) {
         showToastMessage(
           '이전에 작성한 편지가 있어요. 크리스마스에 메일함을 확인해주세요!'
         );
