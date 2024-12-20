@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.GMAIL_AUTH_EMAIL,
       to: email,
-      subject: '[산타우체통]이메일 인증을 완료해주세요!💌',
+      subject: '[산타우체통] 이메일 인증을 완료해주세요!💌',
       html: `
     <p>
       크리스마스에 산타 할아버지의 답장을 받으려면 아래 버튼을 눌러 이메일 인증을 완료해주세요.

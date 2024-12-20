@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: '이미 인증된 링크입니다. 이메일 인증을 다시 진행해주세요.',
+          error: '이미 인증된 링크입니다. 이메일 인증이 완료되었습니다.',
         },
         { status: 500 }
       );
