@@ -15,10 +15,25 @@ export default function MailboxContent() {
   });
   const [isLetterViewModalOpen, setIsLetterViewModalOpen] =
     useState<boolean>(false);
-  const information = [
-    ['산타 할아버지의 답장이 도착했어요 💌', '우체통을 클릭해보세요!'],
-    ['산타 할아버지에게 받은 답장이 없어요 😢', '메일함을 다시 확인해 주세요!'],
-  ];
+
+  const getMessage = () => {
+    if (letterResponse.isPending) {
+      return {
+        title: '산타 할아버지의 답장을 확인하고 있어요.',
+        subtitle: '잠시만 기다려주세요!',
+      };
+    }
+    if (letterResponse.data?.letter) {
+      return {
+        title: '산타 할아버지의 답장이 도착했어요 💌',
+        subtitle: '우체통을 클릭해보세요!',
+      };
+    }
+    return {
+      title: '산타 할아버지에게 받은 답장이 없어요 😢',
+      subtitle: '메일함을 다시 확인해 주세요!',
+    };
+  };
 
   const changeIsLetterViewModalOpen = () => {
     setIsLetterViewModalOpen(
@@ -48,10 +63,8 @@ export default function MailboxContent() {
         ></Image>
       </div>
       <p className='mt-2 text-sm lg:mt-4 lg:text-lg'>
-        {letterResponse.data?.letter ? information[0][0] : information[1][0]}
-        <span className='block'>
-          {letterResponse.data?.letter ? information[0][1] : information[1][1]}
-        </span>
+        {getMessage().title}
+        <span className='block'>{getMessage().subtitle}</span>
       </p>
       {isLetterViewModalOpen && letterResponse.data?.letter && (
         <LetterViewModal
