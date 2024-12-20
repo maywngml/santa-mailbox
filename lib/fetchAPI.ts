@@ -3,7 +3,8 @@ import type { FetchAPIParams, FetchAPIOptions } from '@/types/common';
 export default async function fetchAPI({
   method,
   url,
-  body = null,
+  body,
+  token,
 }: FetchAPIParams) {
   try {
     const options: FetchAPIOptions = {
@@ -16,8 +17,13 @@ export default async function fetchAPI({
     if (body) {
       options.body = JSON.stringify(body);
     }
+    if (token) {
+      options.headers.Authorization = `Bearer ${token}`;
+    }
 
-    const response = await fetch(`/api${url}`, options);
+    const baseURL =
+      typeof window === 'undefined' ? process.env.HOMEPAGE_URL : '';
+    const response = await fetch(`${baseURL}/api${url}`, options);
     const result = await response.json();
 
     if (!response.ok) {
