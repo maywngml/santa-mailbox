@@ -17,21 +17,28 @@ export async function GET() {
       },
     });
     const letters = await LetterModel.find();
-    const emailPromises = letters.map((letter: Letter) =>
-      transporter.sendMail({
-        from: process.env.GMAIL_AUTH_EMAIL,
-        to: letter.email,
-        subject: '[산타 우체통] 산타 할아버지의 답장이 도착했어요💌',
-        html: `<p>드디어 기다리던 크리스마스가 시작됐어요!</p><p>산타 할아버지에게서 특별한 답장이 도착했다는데요!</p><p>지금 바로 확인해보러 가볼까요?</p><a href='${process.env.HOMEPAGE_URL}/mailbox?letterId=${letter.id}'>👉 [답장 확인하러 가기]</a><p>산타 할아버지의 마음이 담긴 답장과 함께</p><p>행복이 가득한 크리스마스를 보내시길 바래요.</p><p>올 한해도 고생 많으셨습니다💗</p><p>메리 크리스마스!🎄✨</p>`,
-      })
-    );
-    const result = await Promise.allSettled(emailPromises);
+    const results = [];
+    const BATCH_SIZE = 10;
 
-    console.log('send email api', result);
+    for (let i = 0; i < letters.length; i += BATCH_SIZE) {
+      const batch = letters.slice(i, i + BATCH_SIZE);
+      const batchPromises = batch.map((letter: Letter) =>
+        transporter.sendMail({
+          from: process.env.GMAIL_AUTH_EMAIL,
+          to: letter.email,
+          subject: '[산타 우체통] 산타 할아버지의 답장이 도착했어요💌',
+          html: `<p>드디어 기다리던 크리스마스가 시작됐어요!</p><p>산타 할아버지에게서 특별한 답장이 도착했다는데요!</p><p>지금 바로 확인해보러 가볼까요?</p><a href='${process.env.HOMEPAGE_URL}/mailbox?letterId=${letter.id}'>👉 [답장 확인하러 가기]</a><p>산타 할아버지의 마음이 담긴 답장과 함께</p><p>행복이 가득한 크리스마스를 보내시길 바래요.</p><p>올 한해도 고생 많으셨습니다💗</p><p>메리 크리스마스!🎄✨</p>`,
+        })
+      );
+      const result = await Promise.allSettled(batchPromises);
+      results.push(result);
+      console.log('send email api', result);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
 
     return NextResponse.json(
       {
-        result,
+        results,
       },
       {
         headers,
