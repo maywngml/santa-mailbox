@@ -23,7 +23,10 @@ export async function GET(request: NextRequest) {
 
     if (encryptedEmail) {
       const decodedEncryptedEmail = decodeURIComponent(encryptedEmail);
-      const email = getDecryptedText(decodedEncryptedEmail);
+      const email = getDecryptedText(
+        decodedEncryptedEmail,
+        process.env.CRYPTO_SECRET_KEY as string
+      );
       filter = { email };
     } else {
       filter = { verificationToken: token };

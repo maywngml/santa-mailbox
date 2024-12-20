@@ -23,7 +23,11 @@ export async function GET(request: NextRequest) {
     }
 
     const decodedEncryptedEmail = decodeURIComponent(encryptedEmail);
-    const email = getDecryptedText(decodedEncryptedEmail);
+    const email = getDecryptedText(
+      decodedEncryptedEmail,
+      process.env.CRYPTO_SECRET_KEY as string
+    );
+    console.log('get email', encryptedEmail, decodedEncryptedEmail, email);
     const letter = await LetterModel.findOne({ email });
 
     console.log({ letter });
@@ -73,8 +77,9 @@ export async function POST(request: NextRequest) {
     console.log('post letter api gpt', gptResponse);
     console.log('post letter api gpt', gptResponse.choices[0].message);
 
-    const letterId = encodeURIComponent(
-      getEncryptedText(email, process.env.CRYPTO_SECRET_KEY as string)
+    const letterId = getEncryptedText(
+      email,
+      process.env.CRYPTO_SECRET_KEY as string
     );
     const dbResponse = await new LetterModel({
       ...body,
