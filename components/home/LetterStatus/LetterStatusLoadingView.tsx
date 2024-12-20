@@ -1,15 +1,16 @@
-import Image from 'next/image';
+import Lottie from 'react-lottie-player';
+import deerJson from '@/public/lottie/deer.json';
 
 export default function LetterStatusLoadingView() {
   return (
     <div>
-      <Image
-        src='/images/deer-christmas.gif'
-        width={400}
-        height={400}
-        alt='목에 빨간 띠를 두르고 달려가는 루돌프'
-      />
-      <p className='mt-3 text-sm lg:mt-6 lg:text-lg'>
+      <Lottie
+        loop
+        animationData={deerJson}
+        play
+        style={{ width: 300, height: 300 }}
+      ></Lottie>
+      <p className='text-sm lg:text-lg'>
         산타 할아버지에게 편지를 보내는 중이예요 🦌
         <br className='block lg:hidden' />
       </p>
