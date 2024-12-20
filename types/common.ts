@@ -4,6 +4,7 @@ export interface FetchAPIParams {
   method: Method;
   url: string;
   body?: any;
+  token?: string;
 }
 
 export interface FetchAPIOptions {
