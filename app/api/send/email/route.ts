@@ -4,10 +4,11 @@ import nodemailer from 'nodemailer';
 import { LetterModel } from '@/db/models/Letter';
 import type { Letter } from '@/db/models/Letter';
 
-export async function POST() {
+export async function GET() {
   try {
     await connectDB();
 
+    const headers = new Headers({ 'Cache-Control': 'no-store' });
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -32,7 +33,10 @@ export async function POST() {
       {
         result,
       },
-      { status: 200 }
+      {
+        headers,
+        status: 200,
+      }
     );
   } catch (error) {
     console.error({ error });
