@@ -1,5 +1,8 @@
-import Lottie from 'react-lottie-player';
+'use client';
+import dynamic from 'next/dynamic';
 import deerJson from '@/public/lottie/deer.json';
+
+const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 
 export default function LetterStatusLoadingView() {
   return (
