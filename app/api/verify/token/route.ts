@@ -12,7 +12,8 @@ export async function POST(request: NextRequest) {
     if (!bearerToken) {
       return NextResponse.json(
         {
-          error: '토큰을 제공해야 합니다.',
+          error:
+            '이메일 인증 링크가 유효하지 않습니다. 이메일 인증을 다시 진행해주세요.',
         },
         { status: 500 }
       );
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: '이미 만료된 토큰입니다. 이메일 인증을 다시 진행해주세요.',
+          error: '이미 인증된 링크입니다. 이메일 인증을 다시 진행해주세요.',
         },
         { status: 500 }
       );
