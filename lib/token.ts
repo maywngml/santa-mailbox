@@ -16,8 +16,7 @@ export async function verifyToken(
       token,
     });
     return {
-      message:
-        '이메일 인증이 완료되었어요. 이제 산타 할아버지께 편지를 완성해 보세요.',
+      message: '이메일 인증이 완료되었어요. 이제 편지를 완성해 보세요.',
     };
   } catch (error) {
     console.error({ error });
