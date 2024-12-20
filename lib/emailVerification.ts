@@ -3,17 +3,11 @@ import { getEncryptedText } from '@/lib/helpers';
 import type { EmailVerificationResponse } from '@/types/emailVerification';
 
 export async function getEmailVerification(
-  email: string,
-  isEncrypted: boolean = false
+  email: string
 ): Promise<EmailVerificationResponse> {
-  const encryptedEmail = isEncrypted
-    ? email
-    : encodeURIComponent(
-        getEncryptedText(
-          email,
-          process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string
-        )
-      );
+  const encryptedEmail = encodeURIComponent(
+    getEncryptedText(email, process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string)
+  );
 
   return fetchAPI({
     method: 'GET',
