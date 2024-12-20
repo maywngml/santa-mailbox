@@ -7,7 +7,7 @@ export async function getLetter(
   isEncrypted: boolean = false
 ): Promise<LetterResponse> {
   const encryptedEmail = isEncrypted
-    ? email
+    ? encodeURIComponent(email)
     : encodeURIComponent(
         getEncryptedText(
           email,
