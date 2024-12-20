@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error:
-            '이메일 인증 링크가 유효하지 않습니다. 이메일 인증을 다시 진행해주세요.',
+            '이메일 인증 링크가 유효하지 않습니다. 인증 링크를 확인해주세요.',
         },
         { status: 500 }
       );
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
           '인증 시간이 만료되었습니다. 이메일 인증을 다시 진행해주세요.';
       } else {
         errorMessage =
-          '이메일 인증 링크가 유효하지 않습니다. 이메일 인증을 다시 진행해주세요.';
+          '이메일 인증 링크가 유효하지 않습니다. 인증 링크를 확인해주세요.';
       }
     }
 
