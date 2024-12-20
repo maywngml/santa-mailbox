@@ -8,7 +8,7 @@ import { getDecryptedText } from '@/lib/helpers';
 export async function POST(request: NextRequest) {
   try {
     await connectDatabase();
-
+    // TODO: email body에 넣도록 변경
     const searchParams = request.nextUrl.searchParams;
     const encryptedEmail = searchParams.get('email');
 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
 
     console.log('email veirifcation verify email api', emailVerification);
 
-    if (emailVerification) {
+    if (emailVerification && emailVerification.isVerified) {
       return NextResponse.json(
         {
           success: false,
