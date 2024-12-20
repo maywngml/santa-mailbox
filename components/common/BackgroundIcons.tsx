@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { Fragment } from 'react';
 import Image from 'next/image';
 
 function BackgroundIcons() {
@@ -107,4 +107,4 @@ function BackgroundIcons() {
   );
 }
 
-export default memo(BackgroundIcons);
+export default BackgroundIcons;
