@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     if (!encryptedEmail) {
       return NextResponse.json(
         {
-          error: '이메일 파라미터가 누락되었습니다.',
+          error: '이메일을 제공해야 합니다.',
         },
         {
           status: 400,
