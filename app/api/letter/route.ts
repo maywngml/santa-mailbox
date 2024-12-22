@@ -4,6 +4,9 @@ import connectDB from '@/db/connectDB';
 import { LetterModel } from '@/db/models/Letter';
 import { getEncryptedText, getDecryptedText } from '@/lib/helpers';
 
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
@@ -69,6 +72,7 @@ export async function POST(request: NextRequest) {
     8. 답장은 6~8문장 정도의 길이여야 합니다.
     사용자 이름: "${name}"
     사용자의 편지 내용: "${content}"  `;
+
     const gptResponse = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: prompt }],
