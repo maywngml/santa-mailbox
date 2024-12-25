@@ -1,3 +1,4 @@
+'use client';
 import { ChangeEvent, useState, useCallback, FormEvent } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { validate } from 'email-validator';

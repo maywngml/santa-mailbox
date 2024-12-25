@@ -10,3 +10,11 @@ export const getDecryptedText = (cyperText: string, key: string) => {
 
   return text;
 };
+
+export const getHypenDate = (inputDate: Date) => {
+  const year = inputDate.getFullYear();
+  const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+  const date = inputDate.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${date}`;
+};

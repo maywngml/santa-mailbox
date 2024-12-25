@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { LetterViewModal } from '@/components/letter';
 import { getLetter } from '@/lib/letter';
 
-export default function MailboxContent() {
+export default function MyLetterContent() {
   const searchParams = useSearchParams();
   const letterId = searchParams.get('letterId') || '';
   const letterResponse = useQuery({
@@ -19,18 +19,18 @@ export default function MailboxContent() {
   const getMessage = () => {
     if (letterResponse.isPending) {
       return {
-        title: '산타 할아버지의 답장을 확인하고 있어요.',
+        title: '작성하신 편지가 있는지 확인하고 있어요.',
         subtitle: '잠시만 기다려주세요!',
       };
     }
     if (letterResponse.data?.letter) {
       return {
-        title: '산타 할아버지의 답장이 도착했어요 💌',
-        subtitle: '우체통을 클릭해보세요!',
+        title: '작성하신 편지가 있네요 💌',
+        subtitle: '편지 봉투를 클릭해보세요!',
       };
     }
     return {
-      title: '산타 할아버지에게 받은 답장이 없어요 😢',
+      title: '작성하신 편지가 없어요 😢',
       subtitle: '메일함을 다시 확인해 주세요!',
     };
   };
@@ -47,21 +47,17 @@ export default function MailboxContent() {
   };
 
   return (
-    <Fragment>
-      <div
-        className={`relative mobile:w-[200px] mobile:h-[200px] w-[400px] h-[400px] ${
+    <div className='mobile:w-[90vw] mobile:max-w-[400px] flex flex-col items-center'>
+      <Image
+        className={
           letterResponse.data?.letter && 'hover:cursor-pointer hover:scale-110'
-        }`}
+        }
+        src='/images/letter.png'
+        width={200}
+        height={200}
+        alt='이메일 이미지'
         onClick={handleCardClick}
-      >
-        <Image
-          src={'/images/mailbox.png'}
-          fill
-          sizes='100%'
-          alt='빨간색 우체통 이미지'
-          priority
-        ></Image>
-      </div>
+      />
       <p className='mt-2 text-sm lg:mt-4 lg:text-lg'>
         {getMessage().title}
         <span className='block'>{getMessage().subtitle}</span>
@@ -69,11 +65,11 @@ export default function MailboxContent() {
       {isLetterViewModalOpen && letterResponse.data?.letter && (
         <LetterViewModal
           isOpen={isLetterViewModalOpen}
-          isReply={true}
+          isReply={false}
           onClose={changeIsLetterViewModalOpen}
-          letter={letterResponse.data?.letter.reply}
+          letter={letterResponse.data?.letter.content}
         />
       )}
-    </Fragment>
+    </div>
   );
 }
