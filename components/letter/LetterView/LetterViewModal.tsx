@@ -154,7 +154,7 @@ export default function LetterViewModal({
       onClose={onClose}
     >
       <ArrowDownTrayIcon
-        className='absolute top-4 left-6 hover:cursor-pointer lg:top-6'
+        className='absolute top-4 left-6 hover:cursor-pointer lg:top-6 lg:left-8'
         color='#B8771C'
         width={30}
         height={30}
