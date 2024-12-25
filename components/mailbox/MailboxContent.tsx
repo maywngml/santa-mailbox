@@ -69,6 +69,7 @@ export default function MailboxContent() {
       {isLetterViewModalOpen && letterResponse.data?.letter && (
         <LetterViewModal
           isOpen={isLetterViewModalOpen}
+          isReply={true}
           onClose={changeIsLetterViewModalOpen}
           letter={letterResponse.data?.letter.reply}
         />
