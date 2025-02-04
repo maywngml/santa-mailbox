@@ -2,7 +2,11 @@ import { Parisienne } from 'next/font/google';
 import { BackgroundIcons, BgmController, Footer } from '@/components/common';
 import type { ReactNode } from 'react';
 
-const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
+const parisienne = Parisienne({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'block',
+});
 
 interface LayoutProps {
   children: ReactNode;
