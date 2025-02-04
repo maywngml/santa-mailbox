@@ -10,6 +10,7 @@ const neoDgm = localFont({
   src: './fonts/neodgm.woff',
   variable: '--font-neodgm',
   weight: '100 900',
+  display: 'block',
 });
 
 export const metadata: Metadata = {
